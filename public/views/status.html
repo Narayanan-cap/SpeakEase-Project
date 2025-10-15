@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Complaint Management</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/status.css">
+ 
+</head>
+<body>
+<header class="site-header">
+    <div class="logo"> SpeakEase</div>
+    <nav>
+      <nav>
+      <a href="/home">Home</a>
+      <a href="/status" >Status</a>
+      <a href="/index" >Feedback</a>
+      <a href="/maintenance" >Maintenance issue</a>
+      <a href="/loginpage">Log In</a>
+      <a href="/admin">Admin</a>
+    </nav>
+    </nav>
+  </header>
+
+  <header class="site-header">
+    <h1>Complaint Management</h1>
+  
+  </header>
+
+
+
+  <!-- 🔍 Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by ID, category, or summary..." />
+    <button onclick="searchComplaint()">Search</button>
+  </div>
+
+  <!-- Loading indicator -->
+  <div id="loadingIndicator" class="loading-container">
+    <p>Loading data...</p>
+  </div>
+
+  <!-- Data summary -->
+  <div id="dataSummary" class="data-summary" style="display: none;">
+    <div class="summary-cards">
+      <div class="summary-card">
+        <h3 id="totalCount">0</h3>
+        <p>Total Records</p>
+      </div>
+      <div class="summary-card">
+        <h3 id="feedbackCount">0</h3>
+        <p>Feedback</p>
+      </div>
+      <div class="summary-card">
+        <h3 id="maintenanceCount">0</h3>
+        <p>Maintenance</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table id="complaintTable">
+      <thead>
+        <tr>
+          <th>Feedback ID</th>
+          <th>Category</th>
+          <th>Summary</th>
+          <th>status</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Data will be loaded dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+
+  <footer class="site-footer">
+    <p></p>
+  </footer>
+</body>
+<script>
+    // Load data when page loads
+    window.addEventListener('load', loadstatusData);
+
+    async function loadstatusData() {
+      try {
+        console.log('Loading status data...');
+        const response = await fetch('/api/status');
+        const data = await response.json();
+        
+        if (data.success) {
+          console.log('Data loaded successfully:', data);
+          populateTable(data.data);
+          updateSummary(data);
+          hideLoading();
+        } else {
+          console.error('Failed to load data:', data.message);
+          showError('Failed to load data: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error loading status data:', error);
+        showError('Network error: Unable to load data');
+      }
+    }
+
+    function populateTable(records) {
+      const tableBody = document.getElementById('tableBody');
+      
+      if (records.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No records found</td></tr>';
+        return;
+      }
+      
+      tableBody.innerHTML = records.map(record => {
+        const statusClass = getstatusClass(record.status);
+        return `
+          <tr>
+            <td>${record.feedbackId || 'N/A'}</td>
+            <td>${record.category || 'N/A'}</td>
+            <td>${record.summary || 'N/A'}</td>
+            <td><span class="status ${statusClass}">${record.status}</span></td>
+            <td><span class="type-badge ${record.type.toLowerCase()}">${record.type}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function getstatusClass(status) {
+      switch(status?.toLowerCase()) {
+        case 'pending': return 'pending';
+        case 'review': return 'in progress';
+        case 'resolved': return 'resolved';
+        case 'closed': return 'resolved';
+        default: return 'pending';
+      }
+    }
+
+    function updateSummary(data) {
+      document.getElementById('totalCount').textContent = data.totalCount || 0;
+      document.getElementById('feedbackCount').textContent = data.feedbackCount || 0;
+      document.getElementById('maintenanceCount').textContent = data.maintenanceCount || 0;
+      document.getElementById('dataSummary').style.display = 'block';
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingIndicator').style.display = 'none';
+    }
+
+    function showError(message) {
+      const tableBody = document.getElementById('tableBody');
+      tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error: ${message}</td></tr>`;
+      hideLoading();
+    }
+
+    function searchComplaint() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let rows = document.querySelectorAll("#complaintTable tbody tr");
+
+      rows.forEach(row => {
+        if (row.children.length < 5) return; // Skip error/empty rows
+        
+        let feedbackID = row.cells[0].innerText.toLowerCase();
+        let category = row.cells[1].innerText.toLowerCase();
+        let summary = row.cells[2].innerText.toLowerCase();
+        let status = row.cells[3].innerText.toLowerCase();
+        let type = row.cells[4].innerText.toLowerCase();
+
+        if (
+          feedbackID.includes(input) ||
+          category.includes(input) ||
+          summary.includes(input) ||
+          status.includes(input) ||
+          type.includes(input)
+        ) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+<script src="/js/auth.js"></script>
+</html>

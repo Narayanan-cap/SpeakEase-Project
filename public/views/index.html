@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validated Feedback Form</title>
+  <link rel="stylesheet" href="/css/index.css">
+  
+</head>
+<body class="form" >
+<div class="backimg"><header class="site-header" style="margin-top: 0px;">
+    <div class="logo">SpeakEase</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/status" >Status</a>
+      <a href="/index" >Feedback</a>
+      <a href="/maintenance" >Maintenance issue</a>
+      <a href="/loginpage">Log In</a>
+      <a href="/admin">Admin</a>
+      
+    </nav>
+  </header>
+</div>
+  
+ <div id="toast" class="toast"></div>
+
+<div class="form-container">
+  <form class="form-box" onsubmit="return validateForm()">
+    <h2>Submit Your Feedback</h2>
+    
+    <label for="type">Type:</label>
+    <select id="type" required>
+      <option disabled selected>Select Type</option>
+      <option>Complaint</option>
+      <option>Suggestion</option>
+    </select>
+    <span id="type-icon" class="feedback-icon"></span>
+
+    <label for="category">Category:</label>
+    <select id="category" required>
+      <option disabled selected>Select Category</option>
+      <option>Academics</option>
+      <option>Infrastructure</option>
+      <option>HR</option>
+      <option>Behavior</option>
+      <option>Others</option>
+    </select>
+    <span id="category-icon" class="feedback-icon"></span>
+
+    <!-- Description -->
+    <label for="description">Description:</label>
+    <div class="field-group">
+      <textarea id="description" rows="3" required></textarea>
+      <span id="description-icon" class="feedback-icon"></span>
+    </div>
+
+    <!-- Name -->
+    <label for="name">Name:</label>
+    <div class="field-group">
+      <input type="text" id="name" required>
+      <span id="name-icon" class="feedback-icon"></span>
+    </div>
+
+    <!-- Mobile -->
+    <label for="mobile">Mobile Number:</label>
+    <div class="field-group">
+      <input type="tel" id="mobile" maxlength="10" required>
+      <span id="mobile-icon" class="feedback-icon"></span>
+    </div>
+
+    <!-- Email -->
+    <label for="email">Email:</label>
+    <div class="field-group">
+      <input type="email" id="email" required>
+      <span id="email-icon" class="feedback-icon"></span>
+    </div>
+
+    <!-- Address -->
+    <label for="address">Address:</label>
+    <div class="field-group">
+      <textarea id="address" rows="3" required></textarea>
+      <span id="address-icon" class="feedback-icon"></span>
+    </div>
+
+    <button type="submit" class="btn">Submit</button>
+  </form>
+ 
+
+
+</div>
+
+
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+
+</body>
+</html>

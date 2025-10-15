@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Complaint Management</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/status.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('images/bg.jpg'); /* Replace with your actual image path */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+    }
+
+    .site-header {
+      background-color: rgba(0, 121, 107, 0.9);
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .search-container input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .search-container button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background-color: #00796b;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .table-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    thead {
+      background-color: #00796b;
+      color: white;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: left;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+
+    .status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      display: inline-block;
+    }
+
+    .pending {
+      background-color: #f44336;
+    }
+
+    .review {
+      background-color: #ff9800;
+    }
+
+    .resolved {
+      background-color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">SpeakEase</div>
+    <nav>
+        <a href="/home">Home</a>
+      <a href="/status" >Status</a>
+      <a href="/index" >Feedback</a>
+      <a href="/maintenance" >Maintenance issue</a>
+      <a href="/loginpage">Log In</a>  
+    </nav>
+  </header>
+
+  <header class="site-header">
+    <h1>Complaint Management</h1>
+  </header>
+
+  <!-- 🔍 Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by ID, category, or summary..." />
+    <button onclick="searchComplaint()">Search</button>
+  </div>
+
+  <div class="table-container">
+    <table id="complaintTable">
+      <thead>
+        <tr>
+          <th>Complaint ID</th>
+          <th>Category</th>
+          <th>Summary</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr>
+    <td>FB100001</td>
+    <td>Academics</td>
+    <td>Inconsistent class timings affecting students</td>
+    <td><span class="status pending">Pending</span></td>
+  </tr>
+  <tr>
+    <td>FB100002</td>
+    <td>Infrastructure</td>
+    <td>AC not working in Lab 204</td>
+    <td><span class="status review">Under Review</span></td>
+  </tr>
+  <tr>
+    <td>FB100003</td>
+    <td>Behavior</td>
+    <td>Unfair behavior during viva</td>
+    <td><span class="status resolved">Resolved</span></td>
+  </tr>
+  <tr>
+    <td>FB100004</td>
+    <td>HR</td>
+    <td>Salary slip delay</td>
+    <td><span class="status review">Under Review</span></td>
+  </tr>
+  <tr>
+    <td>FB100005</td>
+    <td>Others</td>
+    <td>Canteen hygiene concern</td>
+    <td><span class="status resolved">Resolved</span></td>
+  </tr>
+</tbody>
+
+    </table>
+  </div>
+
+  <footer class="site-footer">
+    <p></p>
+  </footer>
+
+  <!-- 🔍 JS Search Function -->
+  <script>
+    function searchComplaint() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let rows = document.querySelectorAll("#complaintTable tbody tr");
+
+      rows.forEach(row => {
+        let complaintID = row.cells[0].innerText.toLowerCase();
+        let category = row.cells[1].innerText.toLowerCase();
+        let summary = row.cells[2].innerText.toLowerCase();
+
+        if (
+          complaintID.includes(input) ||
+          category.includes(input) ||
+          summary.includes(input)
+        ) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

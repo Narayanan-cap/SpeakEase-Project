@@ -1,0 +1,289 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgot-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.forgot-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+.lock-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Step Navigation */
+.step {
+  display: none;
+  text-align: left;
+}
+
+.step.active {
+  display: block;
+}
+
+.step h3 {
+  color: #667eea;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* Form Styles */
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px 45px 15px 15px;
+  font-size: 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+  background-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.icon.valid {
+  color: #28a745;
+}
+
+.icon.invalid {
+  color: #dc3545;
+}
+
+/* Button Styles */
+button {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#verify-account-btn,
+#reset-password-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin-top: 10px;
+}
+
+#verify-account-btn:hover,
+#reset-password-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* OTP Section */
+.otp-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.otp-actions button {
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+  text-transform: none;
+}
+
+#verify-otp-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+}
+
+#verify-otp-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+#resend-otp-btn {
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  color: #212529;
+}
+
+#resend-otp-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+/* Message Styles */
+.message {
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f1aeb5;
+}
+
+.message.info {
+  background-color: #cce7ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+/* Timer */
+.timer {
+  text-align: center;
+  margin-top: 15px;
+  color: #666;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Password Requirements */
+.password-requirements {
+  margin-top: 15px;
+  font-size: 12px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.password-requirements p {
+  margin: 8px 0;
+  padding-left: 5px;
+}
+
+.password-requirements .valid {
+  color: #28a745;
+}
+
+.password-requirements .invalid {
+  color: #dc3545;
+}
+
+/* Navigation Links */
+.nav-links {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.nav-links p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.nav-links a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .forgot-container {
+    padding: 10px;
+  }
+  
+  .forgot-box {
+    padding: 25px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  .lock-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .otp-actions {
+    flex-direction: column;
+  }
+  
+  .otp-actions button {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "fname": "Kunal",
+    "lname":"sahu",
+    "email": "kunal@gmail.com",
+    "phone": "9999999999",
+    "username": "kunal123",
+    "password": "Kunal@123"
+  },
+  {
+    "fname": "Kunal",
+    "lname":"sahu",
+    "email": "kunal0@gmail.com",
+    "phone": "9999999999",
+    "username": "kunal000",
+    "password": "Kunal@000"
+  }
+]

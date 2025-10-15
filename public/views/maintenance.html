@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance Feedback</title>
+  
+  <link rel="stylesheet" href="/css/maintenance.css">
+  <style>
+    .field-group {
+  position: relative;
+}
+
+.feedback-icon {
+  position: absolute;
+  right: 10px;
+  top: 38px;
+  font-size: 18px;
+}
+
+.valid {
+  border-color: green;
+}
+
+.invalid {
+  border-color: red;
+}
+
+.green { color: green; }
+.red { color: red; }
+
+  </style>
+</head>
+<body class="form" >
+  <div class="form-background">
+  <!-- Header -->
+  <header class="site-header" >
+    <div class="logo">SpeakEase</div>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/status" >Status</a>
+      <a href="/index" >Feedback</a>
+      <a href="/maintenance" class="active" >Maintenance issue</a>
+      <a href="/loginpage">Log In</a>
+      <a href="/admin">Admin</a>
+      
+    </nav>
+</header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+  <!-- Form -->
+ <div class="form-container">
+
+<div class="form-content">    
+       <!-- 📷 Maintenance Image -->
+    <div class="form-image">
+      <img src="/images/maintenance_back.jpeg" alt="Maintenance Illustration">
+      <div class="image-overlay">
+        <h3>We're Here to Help!</h3>
+        <p>Report maintenance issues quickly and efficiently</p>
+      </div>
+    </div>
+
+    <div class="form-wrapper">
+    <form class="form-box" onsubmit="return validateForm()">
+      <h2>Report a Maintenance Issue</h2>
+
+      <!-- Location -->
+      <label for="location">Location / Area:</label>
+      <div class="field-group">
+        <input type="text" id="location" name="location" placeholder="e.g., Block B, 2nd Floor Washroom" required>
+        <span id="location-icon" class="feedback-icon"></span>
+      </div>
+
+      <!-- Category -->
+      <label for="category">Issue Category:</label>
+      <select id="category" name="category" required>
+        <option disabled selected>Select Issue</option>
+        <option>Cleaning</option>
+        <option>Electrical</option>
+        <option>Plumbing</option>
+        <option>Water Supply</option>
+        <option>Air Conditioning</option>
+        <option>Security</option>
+        <option>Others</option>
+      </select>
+
+      <!-- Date -->
+      <label for="date">Date of Issue:</label>
+      <div class="field-group">
+        <input type="text" id="date" name="date" placeholder="dd-mm-yyyy" required>
+
+        <span id="date-icon" class="feedback-icon"></span>
+      </div>
+
+      <!-- Time -->
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time">
+
+      <!-- Description -->
+<label for="description">Issue Description:</label>
+<div class="field-group">
+  <textarea id="description" name="description" rows="3" placeholder="Explain the issue you faced..." required></textarea>
+  <span id="description-icon" class="feedback-icon"></span> <!-- Fixed: was desc-icon -->
+</div>
+
+      <!-- Staff -->
+      <label for="staff">Staff Interaction:</label>
+      <input type="text" id="staff" name="staff" placeholder="Staff name or ID (if known)">
+
+      <!-- Name -->
+      <label for="name">Your Name:</label>
+      <div class="field-group">
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <span id="name-icon" class="feedback-icon"></span>
+      </div>
+
+      <!-- Contact -->
+      <label for="contact">Contact Number:</label>
+      <div class="field-group">
+        <input type="tel" id="contact" name="contact" placeholder="9876543210" maxlength="10" required>
+        <span id="contact-icon" class="feedback-icon"></span>
+      </div>
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    </div>
+</div>
+</div>
+  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>Maintenance Feedback | HTML & CSS Only</p>
+  </footer>
+</body>
+
+<script src="/js/auth.js"></script>
+<script src="/js/maintenance_debug.js"></script>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - SpeakEase</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Admin Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboard" style="display: none;">
+    <header class="site-header">
+      <div class="logo">SpeakEase Admin</div>
+      <nav>
+        <a href="/home">Home</a>
+        <a href="/Status">Status</a>
+        <a href="/index">Feedback</a>
+        <a href="/maintenance">Maintenance</a>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="admin-main">
+      <h1>Admin Dashboard</h1>
+      
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h3 id="totalRecords">0</h3>
+          <p>Total Records</p>
+        </div>
+        <div class="summary-card">
+          <h3 id="feedbackRecords">0</h3>
+          <p>Feedback Records</p>
+        </div>
+        <div class="summary-card">
+          <h3 id="maintenanceRecords">0</h3>
+          <p>Maintenance Records</p>
+        </div>
+      </div>
+
+      <!-- Filter Options -->
+      <div class="filter-section">
+        <select id="StatusFilter">
+          <option value="">All Status</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+        <select id="typeFilter">
+          <option value="">All Types</option>
+          <option value="Feedback">Feedback</option>
+          <option value="Maintenance">Maintenance</option>
+        </select>
+      </div>
+
+      <!-- Records Table -->
+      <div class="table-container">
+        <table id="recordsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Summary</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="recordsTableBody">
+            <!-- Records will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Success/Error Message -->
+  <div id="message" class="message"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
