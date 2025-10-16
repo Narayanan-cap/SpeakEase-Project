@@ -80,11 +80,12 @@ pipeline {
 
     stage('Get LoadBalancer IP') {
         steps {
-            sh '''
-            echo "🔍 Fetching LoadBalancer IP for backend-service..."
-            kubectl get svc backend-service -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"
-            echo ""
-            '''
+            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Credentials']]) {
+            script {
+                def backendLB = sh(script: "kubectl get svc backend-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+                echo "🌐 Backend LoadBalancer URL: http://${backendLB}"
+            }
+            }
         }
     }
   }
