@@ -18,14 +18,14 @@ spec:
         ports:
         - containerPort: 3000
         env:
-        - name: NODE_ENV
-          value: "development"
-        - name: DEVELOPMENT_MODE
-        - name: AUTH_DB_URI
-          value: "mongodb://mongo-service:27017/authdb"
-        - name: FEEDBACK_DB_URI
-          value: "mongodb://mongo-service:27017/feedbackDB"
-
+          - name: NODE_ENV
+            value: "development"
+          - name: DEVELOPMENT_MODE
+            value: "true"
+          - name: AUTH_DB_URI
+            value: "mongodb://mongo-service:27017/authdb"
+          - name: FEEDBACK_DB_URI
+            value: "mongodb://mongo-service:27017/feedbackDB"
 
 ---
 apiVersion: v1
