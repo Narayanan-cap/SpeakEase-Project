@@ -72,7 +72,7 @@ pipeline {
             kubectl apply -f ${MONGO_DEPLOYMENT_FILE}
             kubectl rollout status deployment/mongo-deployment
             kubectl apply -f ${BACKEND_DEPLOYMENT_FILE}
-            kubectl rollout status deployment/backend-deployment
+            kubectl rollout status deployment/app-deployment
           """
         }
       }
