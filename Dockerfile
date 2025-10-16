@@ -3,7 +3,6 @@ FROM node:18
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install dotenv
 RUN npm install dotenv dd-trace
 
 COPY . .
