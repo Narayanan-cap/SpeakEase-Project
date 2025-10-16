@@ -22,11 +22,9 @@ spec:
             value: "development"
           - name: DEVELOPMENT_MODE
             value: "true"
-          - name: DOTENV_KEY
-            value: "override"
-          - name: AUTH_DB_URI
+          - name: MONGODB_AUTH_URI
             value: "mongodb://mongo-service:27017/authdb"
-          - name: FEEDBACK_DB_URI
+          - name: MONGODB_FEEDBACK_URI
             value: "mongodb://mongo-service:27017/feedbackDB"
 ---
 apiVersion: v1
