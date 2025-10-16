@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: backend-deployment
 spec:
   replicas: 3
   selector:
@@ -12,30 +12,40 @@ spec:
       labels:
         app: backend
     spec:
+      initContainers:
+      - name: wait-for-mongo
+        image: busybox
+        command: ['sh', '-c', 'until nc -z mongo-service 27017; do echo waiting for MongoDB; sleep 5; done;']
       containers:
       - name: backend
         image: 636768524979.dkr.ecr.us-west-1.amazonaws.com/narayanan-cap:latest-speakease
         ports:
         - containerPort: 3000
         env:
-          - name: NODE_ENV
-            value: "development"
-          - name: DEVELOPMENT_MODE
-            value: "true"
-          - name: MONGODB_AUTH_URI
-            value: "mongodb://mongo-service:27017/authdb"
-          - name: MONGODB_FEEDBACK_URI
-            value: "mongodb://mongo-service:27017/feedbackDB"
+        - name: NODE_ENV
+          value: "development"
+        - name: DEVELOPMENT_MODE
+          value: "true"
+        - name: MONGODB_AUTH_URI
+          value: "mongodb://mongo-service:27017/authdb"
+        - name: MONGODB_FEEDBACK_URI
+          value: "mongodb://mongo-service:27017/feedbackDB"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 15
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
 spec:
-  type: LoadBalancer
   selector:
     app: backend
   ports:
   - protocol: TCP
     port: 3000
     targetPort: 3000
+  type: LoadBalancer
