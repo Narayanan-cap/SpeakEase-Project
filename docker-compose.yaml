@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # - EMAIL_SERVICE=gmail
+      # - EMAIL_USER=your-email@gmail.com
+      # - EMAIL_PASSWORD=your-app-password
+      # - EMAIL_FROM=your-email@gmail.com
+      - DEVELOPMENT_MODE=true
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
