@@ -64,6 +64,16 @@ pipeline {
       }
     }
 
+    stage('Prepare Deployment YAML') {
+      steps {
+        script {
+          def yaml = readFile(file: BACKEND_DEPLOYMENT_FILE)
+          def updatedYaml = yaml.replaceAll(/(?s)readinessProbe:.*?periodSeconds: \\d+\\n/, '')
+          writeFile(file: 'backend-deployment-no-readiness.yaml', text: updatedYaml)
+        }
+      }
+    }
+
     stage('Deploy to EKS') {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Credentials']]) {
@@ -71,22 +81,22 @@ pipeline {
             aws eks update-kubeconfig --region ${AWS_REGION} --name ${CLUSTER_NAME}
             kubectl apply -f ${MONGO_DEPLOYMENT_FILE}
             kubectl rollout status deployment/mongo-deployment
-            kubectl apply -f ${BACKEND_DEPLOYMENT_FILE}
-            kubectl rollout status deployment/app-deployment
+            kubectl apply -f backend-deployment-no-readiness.yaml
+            kubectl rollout status deployment/backend-deployment
           """
         }
       }
     }
 
     stage('Get LoadBalancer IP') {
-        steps {
-            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Credentials']]) {
-            script {
-                def backendLB = sh(script: "kubectl get svc backend-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
-                echo "🌐 Backend LoadBalancer URL: http://${backendLB}"
-            }
-            }
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_Credentials']]) {
+          script {
+            def backendLB = sh(script: "kubectl get svc backend-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+            echo "🌐 Backend LoadBalancer URL: http://${backendLB}"
+          }
         }
+      }
     }
   }
 
