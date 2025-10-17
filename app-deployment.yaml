@@ -30,12 +30,12 @@ spec:
           value: "mongodb://mongo-service:27017/authdb"
         - name: MONGODB_FEEDBACK_URI
           value: "mongodb://mongo-service:27017/feedbackDB"
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 3000
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
         startupProbe:
           httpGet:
             path: /health
