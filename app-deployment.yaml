@@ -15,7 +15,7 @@ spec:
       initContainers:
       - name: wait-for-mongo
         image: busybox
-        command: ['sh', '-c', 'until nc -z mongo-service 27017; do echo waiting for MongoDB; sleep 5; done;']
+        command: ['sh', '-c', 'until nc -z mongo-service 27017; do echo waiting for MongoDB; sleep 10; done;']
       containers:
       - name: backend
         image: 636768524979.dkr.ecr.us-west-1.amazonaws.com/narayanan-cap:latest-speakease
@@ -35,6 +35,12 @@ spec:
             path: /health
             port: 3000
           initialDelaySeconds: 30
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          failureThreshold: 30
           periodSeconds: 10
 ---
 apiVersion: v1
