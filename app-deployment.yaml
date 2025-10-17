@@ -30,6 +30,8 @@ spec:
           value: "mongodb://mongo-service:27017/authdb"
         - name: MONGODB_FEEDBACK_URI
           value: "mongodb://mongo-service:27017/feedbackDB"
+        - name: DB_BUFFER_COMMANDS
+          value: "true"
         # readinessProbe:
         #   httpGet:
         #     path: /health
