@@ -9,7 +9,7 @@ const connectionOptions = {
   serverSelectionTimeoutMS: parseInt(process.env.DB_SERVER_SELECTION_TIMEOUT) || 5000,
   connectTimeoutMS: parseInt(process.env.DB_CONNECT_TIMEOUT) || 10000,
   socketTimeoutMS: parseInt(process.env.DB_SOCKET_TIMEOUT) || 45000,
-  bufferCommands: process.env.DB_BUFFER_COMMANDS === 'true'
+  bufferCommands: false
 };
 
 // Debug log to confirm URIs

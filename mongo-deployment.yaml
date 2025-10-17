@@ -14,35 +14,19 @@ spec:
     spec:
       containers:
       - name: mongo
-        image: mongo:6.0
+        image: mongo:5.0
         ports:
         - containerPort: 27017
-        volumeMounts:
-        - name: mongo-data
-          mountPath: /data/db
-        readinessProbe:
-          tcpSocket:
-            port: 27017
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        livenessProbe:
-          tcpSocket:
-            port: 27017
-          initialDelaySeconds: 30
-          periodSeconds: 20
-      volumes:
-      - name: mongo-data
-        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongo-service
 spec:
+  type: ClusterIP
   selector:
     app: mongo
   ports:
   - protocol: TCP
     port: 27017
     targetPort: 27017
-  type: ClusterIP
